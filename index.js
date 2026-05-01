@@ -214,7 +214,8 @@ client.on('interactionCreate', async interaction => {
                     `Mit freundlichen Grüßen` +
                     (grussrolle && grussrolle.id ? `\n<@&${grussrolle.id}>` : '')
                 )
-                .setColor("#0020ff");
+                .setColor("#0020ff")
+                .setImage('https://cdn.discordapp.com/attachments/1492794710266482750/1499876476735062128/2097C6E5-66BD-41A4-B56A-C4A582439332.png?ex=69f66452&is=69f512d2&hm=a4a8aad21ed7cdc43ad0fade2482a045f7b79111b9f92b911db34b9f5e0956f1&');
 
             await interaction.channel.send({ embeds: [embed] });
 
@@ -222,66 +223,63 @@ client.on('interactionCreate', async interaction => {
             }
 
         // ======================
-        // 🚪 TEAM LEAVE COMMAND
+        // 🚪 TEAM KICK COMMAND
         // ======================
-        else if (interaction.commandName === 'teamleave') {
+        else if (interaction.commandName === 'teamkick') {
 
-            const member = await interaction.guild.members.fetch(interaction.user.id);
+    const member = await interaction.guild.members.fetch(interaction.user.id);
 
-            if (!member.roles.cache.has(teamAllowedRoleId)) {
-                return interaction.editReply({
-                    content: "❌ Du hast keine Berechtigung für diesen Command!"
-                });
-            }
+    if (!member.roles.cache.has(teamAllowedRoleId)) {
+        return interaction.editReply({
+            content: "❌ Du hast keine Berechtigung für diesen Command!"
+        });
+    }
 
-            const user = interaction.options.getUser('user');
-            const role = interaction.options.getRole('ehemalige_rolle');
-            const reason = interaction.options.getString('grund');
-            const grussrolle = interaction.options.getRole('grußrolle');
+    const user = interaction.options.getUser('user');
+    const reason = interaction.options.getString('grund');
+    const grussrolle = interaction.options.getRole('grußrolle');
 
-            const teamRoleId = "1493696482015187024";
+    const teamRoleId = "1493696482015187024";
+    const teamRole = interaction.guild.roles.cache.get(teamRoleId); // ✅ HIER definieren
 
-            if (!user || !role) {
-                return interaction.editReply({
-                    content: '❌ User oder Rolle fehlt!'
-                });
-            }
+    if (!user) {
+        return interaction.editReply({
+            content: '❌ User fehlt!'
+        });
+    }
 
-            let target;
-            try {
-                target = await interaction.guild.members.fetch(user.id);
+    let target;
+    try {
+        target = await interaction.guild.members.fetch(user.id);
 
-                if (!target.roles.cache.has(role.id)) {
-                    return interaction.editReply({
-                        content: "❌ Dieser User ist nicht in dieser Rolle!"
-                    });
-                }
-
-                await target.roles.remove(role);
-
-                if (target.roles.cache.has(teamRoleId)) {
-                    await target.roles.remove(teamRoleId);
-                }
-
-            } catch (err) {
-                console.error("ROLE ERROR:", err);
-            }
-
-            const embed = new EmbedBuilder()
-                .setTitle("❌ Team Austritt !")
-                .setDescription(
-                    `Hiermit verlässt <@${user.id}> das Team als <@&${role.id}>.\n\n` +
-                    `**Grund:** ${reason || 'Kein Grund angegeben'}\n\n` +
-                    `**Wir wünschen dir alles Gute**\n\n` +
-                    `Mit freundlichen Grüßen` +
-                    (grussrolle && grussrolle.id ? `\n<@&${grussrolle.id}>` : '')
-                )
-                .setColor("#0020ff");
-
-            await interaction.channel.send({ embeds: [embed] });
-
-            return interaction.editReply({ content: '✅ Erfolgreich gesendet' });
+        if (!target.roles.cache.has(teamRoleId)) {
+            return interaction.editReply({
+                content: "❌ Dieser User ist nicht im Team!"
+            });
         }
+
+        await target.roles.remove(teamRole); // ✅ richtige Rolle entfernen
+
+    } catch (err) {
+        console.error("ROLE ERROR:", err);
+    }
+
+    const embed = new EmbedBuilder()
+        .setTitle("❌ Team Kick !")
+        .setDescription(
+            `Hiermit bekommt <@${user.id}> seinen Teamkick.\n\n` +
+            `**Grund:** ${reason || 'Kein Grund angegeben'}\n\n` +
+            `**Wir wünschen dir alles Gute**\n\n` +
+            `Mit freundlichen Grüßen` +
+            (grussrolle && grussrolle.id ? `\n<@&${grussrolle.id}>` : '')
+        )
+        .setColor("#0020ff")
+        .setImage('https://cdn.discordapp.com/attachments/1492794710266482750/1499876902385746120/8DB043A5-81B2-495E-ABBA-C7B298292CA9.png?ex=69f664b7&is=69f51337&hm=808b8006c4102964edaca9c94ccc684276324c219ccddbc96791b07fb00a75a6&');
+
+    await interaction.channel.send({ embeds: [embed] });
+
+    return interaction.editReply({ content: '✅ Erfolgreich gesendet' });
+}
 
         // ======================
         // ⬆️ UPRANK COMMAND
@@ -327,7 +325,8 @@ client.on('interactionCreate', async interaction => {
                     `Mit freundlichen Grüßen` +
                     (grussrolle && grussrolle.id ? `\n<@&${grussrolle.id}>` : '')
                 )
-                .setColor("#0020ff");
+                .setColor("#0020ff")
+                .setImage('https://cdn.discordapp.com/attachments/1492794710266482750/1499877316698832996/76565770-DEB1-4162-8E0F-6043329C1D20.png?ex=69f6651a&is=69f5139a&hm=055dd045cf07d3f1dbed8b88e7d648145a83b7c09faf4ced048457e3ff7b604d&');
 
             await interaction.channel.send({ embeds: [embed] });
 
@@ -386,7 +385,8 @@ client.on('interactionCreate', async interaction => {
                         `Mit freundlichen Grüßen` +
                         (grussrolle ? `\n<@&${grussrolle.id}>` : '')
                     )
-                    .setColor("#0020ff");
+                    .setColor("#0020ff")
+                    .setImage('https://cdn.discordapp.com/attachments/1492794710266482750/1499878590932717599/4DEFE6DD-1514-434B-8C04-018F1962EFC2.png?ex=69f6664a&is=69f514ca&hm=b6575654ddf183185ba3b442f49a7495a3c68b434bb93b224eff0c8ac3b2cc26&');
 
                 await interaction.channel.send({ embeds: [embed] });
 
