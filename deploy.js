@@ -1,8 +1,12 @@
 require('dotenv').config();
 const { REST, Routes, SlashCommandBuilder } = require('discord.js');
 
+// ======================
+// 💥COMMANDS
+// ======================
+
 const commands = [
-    new SlashCommandBuilder()
+    new SlashCommandBuilder()   //TEAMJOIN 
         .setName('teamjoin')
         .setDescription('Team beitreten')
         .addUserOption(option =>
@@ -12,18 +16,25 @@ const commands = [
         .addRoleOption(option =>
             option.setName('role')
                 .setDescription('Rolle auswählen')
-                .setRequired(true)),
+                .setRequired(true))
+        .addRoleOption(option =>
+            option.setName('grußrolle')
+                .setDescription('Rolle auswählen')
+                .setRequired(true)),        
         
-
-    new SlashCommandBuilder()
-        .setName('leaveteam')
+    new SlashCommandBuilder()   //TEAMLEAVE
+        .setName('teamleave')
         .setDescription('Verlasse ein Team')
+        .addUserOption(option =>
+            option.setName('user')
+                .setDescription('User auswählen')
+                .setRequired(true))
         .addRoleOption(option =>
             option.setName('team')
                 .setDescription('Wähle ein Team')
                 .setRequired(true)),
 
-    new SlashCommandBuilder()
+    new SlashCommandBuilder()   //UPRANK
         .setName('uprank')
         .setDescription('Gibt einem User eine Rolle')
         .addUserOption(option =>
@@ -35,7 +46,7 @@ const commands = [
                 .setDescription('Rolle auswählen')
                 .setRequired(true)),
 
-    new SlashCommandBuilder()
+    new SlashCommandBuilder()   //DERANK
         .setName('downrank')
         .setDescription('Entfernt eine Rolle')
         .addUserOption(option =>
@@ -46,7 +57,12 @@ const commands = [
             option.setName('role')
                 .setDescription('Rolle auswählen')
                 .setRequired(true)),
-].map(cmd => cmd.toJSON());
+
+    new SlashCommandBuilder()
+        .setName('teamliste')
+        .setDescription('Zeigt die Teamliste an'),
+
+    ].map(cmd => cmd.toJSON());
 
 const rest = new REST({ version: '10' }).setToken(process.env.DISCORD_BOT_TOKEN);
 
