@@ -129,10 +129,8 @@ client.on('interactionCreate', async interaction => {
             const user = interaction.options.getUser('user');
             const role = interaction.options.getRole('role');
 
-            // 🔥 mehrere Varianten absichern
-            const grussrolle =
-                interaction.options.getRole('grussrolle') ||
-                interaction.options.getRole('grußrolle');
+                
+            const grußrolle = interaction.options.getRole('grußrolle');
 
             const target = await interaction.guild.members.fetch(user.id);
 
@@ -142,9 +140,10 @@ client.on('interactionCreate', async interaction => {
                 .setTitle("🔵 TEAMUPDATE 🔵")
                 .setDescription(
                     `Hiermit tritt <@${user.id}> dem Team als <@&${role.id}> bei!\n\n` +
+                    `**Grund:** ${interaction.options.getString('grund') || 'Kein Grund angegeben'}\n\n` +
                     `**Wir wünschen dir viel Spaß im Team**\n\n` +
                     `Mit freundlichen Grüßen` +
-                    (grussrolle ? `\n<@&${grussrolle.id}>` : '')
+                    (grußrolle ? `\n<@&${grußrolle.id}>` : '')
                 )
                 .setColor("#0020ff");
 
