@@ -10,24 +10,28 @@ const commands = [
         .setName('teamjoin')
         .setDescription('Team beitreten')
         .addUserOption(option =>
-            option.setName('user')
+            option.setName('benutzer')
                 .setDescription('User auswählen')
                 .setRequired(true))
         .addRoleOption(option =>
-            option.setName('role')
+            option.setName('teamrolle')
                 .setDescription('Rolle auswählen')
+                .setRequired(true))
+        .addStringOption(option =>
+            option.setName('grund')
+                .setDescription('Grund für den Beitritt')
                 .setRequired(true))
         .addRoleOption(option =>
             option.setName('grußrolle')
                 .setDescription('Rolle auswählen')
-                .setRequired(true)),        
-        
+                .setRequired(true)),
+    
     new SlashCommandBuilder()   //TEAMLEAVE
         .setName('teamleave')
         .setDescription('Verlasse ein Team')
         .addUserOption(option =>
-            option.setName('user')
-                .setDescription('User auswählen')
+            option.setName('benutzer')
+                .setDescription('benutzer auswählen')
                 .setRequired(true))
         .addRoleOption(option =>
             option.setName('team')
@@ -38,11 +42,11 @@ const commands = [
         .setName('uprank')
         .setDescription('Gibt einem User eine Rolle')
         .addUserOption(option =>
-            option.setName('user')
-                .setDescription('User auswählen')
+            option.setName('benutzer')
+                .setDescription('Benutzer auswählen')
                 .setRequired(true))
         .addRoleOption(option =>
-            option.setName('role')
+            option.setName('rolle')
                 .setDescription('Rolle auswählen')
                 .setRequired(true)),
 
@@ -50,8 +54,8 @@ const commands = [
         .setName('downrank')
         .setDescription('Entfernt eine Rolle')
         .addUserOption(option =>
-            option.setName('user')
-                .setDescription('User auswählen')
+            option.setName('benutzer')
+                .setDescription('Benutzer auswählen')
                 .setRequired(true))
         .addRoleOption(option =>
             option.setName('role')
