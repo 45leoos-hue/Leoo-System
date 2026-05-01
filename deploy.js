@@ -10,61 +10,118 @@ const commands = [
         .setName('teamjoin')
         .setDescription('Team beitreten')
         .addUserOption(option =>
-            option.setName('benutzer')
-                .setDescription('User auswählen')
+            option.setName('user')
+                .setDescription('user')
                 .setRequired(true))
         .addRoleOption(option =>
-            option.setName('teamrolle')
-                .setDescription('Rolle auswählen')
+            option.setName('role')
+                .setDescription('Team Rolle')
                 .setRequired(true))
         .addStringOption(option =>
             option.setName('grund')
-                .setDescription('Grund für den Beitritt')
+                .setDescription('Grund')
                 .setRequired(true))
         .addRoleOption(option =>
             option.setName('grußrolle')
-                .setDescription('Rolle auswählen')
+                .setDescription('Gruß Rolle')
                 .setRequired(true)),
     
     new SlashCommandBuilder()   //TEAMLEAVE
         .setName('teamleave')
-        .setDescription('Verlasse ein Team')
+        .setDescription('Team austreten')
         .addUserOption(option =>
-            option.setName('benutzer')
-                .setDescription('benutzer auswählen')
+            option.setName('user')
+                .setDescription('user')
                 .setRequired(true))
         .addRoleOption(option =>
-            option.setName('team')
-                .setDescription('Wähle ein Team')
+            option.setName('ehemalige_rolle')
+                .setDescription('Ehemalige Rolle')
+                .setRequired(true))
+        .addStringOption(option =>
+            option.setName('grund')
+                .setDescription('Grund')
+                .setRequired(true))
+        .addRoleOption(option =>
+            option.setName('grußrolle')
+                .setDescription('Gruß Rolle')
                 .setRequired(true)),
-
+        
     new SlashCommandBuilder()   //UPRANK
         .setName('uprank')
         .setDescription('Gibt einem User eine Rolle')
         .addUserOption(option =>
-            option.setName('benutzer')
-                .setDescription('Benutzer auswählen')
+            option.setName('user')
+                .setDescription('User auswählen')
                 .setRequired(true))
         .addRoleOption(option =>
-            option.setName('rolle')
-                .setDescription('Rolle auswählen')
-                .setRequired(true)),
+            option.setName('alte_rolle')
+                .setDescription('Alte Rolle')
+                .setRequired(true))
+        .addRoleOption(option =>
+            option.setName('neue_rolle')
+                .setDescription('Neue Rolle')
+                .setRequired(true))
+        .addStringOption(option =>
+            option.setName('grund')
+                .setDescription('Grund')
+                .setRequired(true))
+        .addRoleOption(option =>
+            option.setName('grußrolle')
+                .setDescription('Gruß Rolle')
+                .setRequired(true)),        
 
     new SlashCommandBuilder()   //DERANK
-        .setName('downrank')
+        .setName('derank')
         .setDescription('Entfernt eine Rolle')
         .addUserOption(option =>
-            option.setName('benutzer')
-                .setDescription('Benutzer auswählen')
+            option.setName('user')
+                .setDescription('User auswählen')
                 .setRequired(true))
         .addRoleOption(option =>
-            option.setName('role')
-                .setDescription('Rolle auswählen')
-                .setRequired(true)),
+            option.setName('alte_rolle')
+                .setDescription('Alte Rolle')
+                .setRequired(true))
+        .addRoleOption(option =>
+            option.setName('neue_rolle')
+                .setDescription('Neue Rolle')
+                .setRequired(true))
+        .addStringOption(option =>
+            option.setName('grund')
+                .setDescription('Grund')
+                .setRequired(true))
+        .addRoleOption(option =>
+            option.setName('grußrolle')
+                .setDescription('Gruß Rolle')
+                .setRequired(true)),          
 
-    new SlashCommandBuilder()
+    new SlashCommandBuilder() //TEAMLISTE
         .setName('teamliste')
         .setDescription('Zeigt die Teamliste an'),
+
+    new SlashCommandBuilder()   //BAN COMMAND
+    .setName('ban')
+    .setDescription('Bannt einen User vom Server')
+    .addUserOption(option =>
+        option.setName('user')
+            .setDescription('Der User')
+            .setRequired(true))
+    .addStringOption(option =>
+        option.setName('grund')
+            .setDescription('Grund')
+            .setRequired(true)),
+
+    new SlashCommandBuilder()   //UNBAN COMMAND
+    .setName('unban')
+    .setDescription('Entbannt einen User vom Server')
+    .addStringOption(option =>
+        option.setName('userid')
+            .setDescription('User ID')
+            .setRequired(true))
+    .addStringOption(option =>
+        option.setName('grund')
+            .setDescription('Grund')
+            .setRequired(true)),
+        
 
     ].map(cmd => cmd.toJSON());
 
