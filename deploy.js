@@ -26,16 +26,12 @@ const commands = [
                 .setDescription('Gruß Rolle')
                 .setRequired(true)),
     
-    new SlashCommandBuilder()   //TEAMLEAVE
-        .setName('teamleave')
-        .setDescription('Team austreten')
+    new SlashCommandBuilder()   //TEAMKICK
+        .setName('teamkick')
+        .setDescription('Entfernt einen User aus einem Team')
         .addUserOption(option =>
             option.setName('user')
                 .setDescription('user')
-                .setRequired(true))
-        .addRoleOption(option =>
-            option.setName('ehemalige_rolle')
-                .setDescription('Ehemalige Rolle')
                 .setRequired(true))
         .addStringOption(option =>
             option.setName('grund')
