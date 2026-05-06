@@ -3,12 +3,19 @@ const { Client, GatewayIntentBits, Collection } = require('discord.js');
 const fs = require('fs');
 const path = require('path');
 
+// 🔥 BLACKLIST REQUIRE
+const bl = require('./utils/blacklistManager');
+
 const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
-        GatewayIntentBits.GuildMembers
+        GatewayIntentBits.GuildMembers,
+        GatewayIntentBits.GuildModeration
     ]
 });
+
+// 🔥 BLACKLIST INIT
+bl.init();
 
 // ======================
 // COLLECTIONS
