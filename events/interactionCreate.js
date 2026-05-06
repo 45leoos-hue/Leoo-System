@@ -91,6 +91,26 @@ module.exports = {
                 return await menu.execute(interaction, client, config);
             }
 
+            // ======================
+            // 🧾 MODALS
+            // ======================
+            if (interaction.isModalSubmit()) {
+
+                try {
+                    const modalPath = path.join(__dirname, `../modals/${interaction.customId}.js`);
+
+                    if (!fs.existsSync(modalPath)) return;
+
+                    const modal = require(modalPath);
+                    if (!modal || !modal.execute) return;
+
+                    return await modal.execute(interaction, client, config);
+
+                } catch (err) {
+                    console.error('Modal Error:', err);
+                }
+            }
+
         } catch (err) {
             console.error(err);
 
