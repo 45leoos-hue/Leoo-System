@@ -10,26 +10,21 @@ module.exports = {
         const farbe = interaction.fields.getTextInputValue('farbe');
         const bild = interaction.fields.getTextInputValue('bild');
         const thumbnail = interaction.fields.getTextInputValue('thumbnail');
-        const footer = interaction.fields.getTextInputValue('footer');
-        const author = interaction.fields.getTextInputValue('author');
 
         let embed = client.embedCache.get(interaction.user.id) || new EmbedBuilder();
 
-        embed.setColor(farbe || '#5865F2');
-
+        if (farbe) embed.setColor(farbe);
         if (titel) embed.setTitle(titel);
         if (beschreibung) embed.setDescription(beschreibung);
         if (bild) embed.setImage(bild);
-        if (thumbnail) embed.setThumbnail(thumbnail);
-        if (footer) embed.setFooter({ text: footer });
-        if (author) embed.setAuthor({ name: author });
+        if (thumbnail) embed.setThumbnail(thumbnail); // ✅ HIER
 
         client.embedCache.set(interaction.user.id, embed);
 
         await interaction.reply({
-            content: '✅ Vorschau aktualisiert',
+            content: '✅ Embed aktualisiert',
             embeds: [embed],
-            ephemeral: true
+            flags: 64
         });
     }
 };
