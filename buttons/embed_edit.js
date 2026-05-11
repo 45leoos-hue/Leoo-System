@@ -9,7 +9,7 @@ module.exports = {
             .setCustomId('embed_modal')
             .setTitle('Embed bearbeiten');
 
-        // ✅ MAX 5 Felder!
+        // MAX 5 Felder (Hauptdaten)
         const fields = [
             ['titel', 'Titel'],
             ['beschreibung', 'Beschreibung', true],
