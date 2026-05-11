@@ -9,13 +9,13 @@ module.exports = {
             .setCustomId('embed_modal')
             .setTitle('Embed bearbeiten');
 
-        // MAX 5 Felder (Hauptdaten)
+        // MAX 5 Felder → Thumbnail jetzt dabei
         const fields = [
             ['titel', 'Titel'],
             ['beschreibung', 'Beschreibung', true],
             ['farbe', 'Farbe (#hex)'],
             ['bild', 'Bild URL'],
-            ['footer', 'Footer']
+            ['thumbnail', 'Thumbnail URL'] // ✅ NEU
         ];
 
         const rows = fields.map(([id, label, long]) =>
